@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option go_package = ".;product";
+
+package product;
+
+service Product {
+  rpc DeleteProduct (DeleteProductRequest) returns (DeleteProductReply) {}
+}
+
+message DeleteProductRequest {
+  int32 id = 1;
+}
+
+message DeleteProductReply {
+  int32 id = 1;
+  string code = 2;
+  int32 price = 3;
+}

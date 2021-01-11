@@ -44,8 +44,11 @@ func server() error {
 }
 
 func main() {
-	fmt.Printf("gRPC server start.")
-	if err := server(); err != nil {
+	fmt.Println("gRPC server start.")
+	//if err := server(); err != nil {
+	//	log.Fatalf("%v", err)
+	//}
+	if err := product.server(); err != nil {
 		log.Fatalf("%v", err)
 	}
 }
