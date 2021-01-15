@@ -1,4 +1,4 @@
-
+package product
 
 import (
 	"context"
@@ -19,7 +19,7 @@ type ServerUnary struct {
 	pb.UnimplementedProductServer
 }
 
-func server() error {
+func Server() error {
 	listen, err := net.Listen("tcp", port)
 	if err != nil {
 		return errors.Wrap(err, "missing port.")
@@ -37,11 +37,12 @@ func (s *ServerUnary) DeleteProduct(ctx context.Context, in *pb.DeleteProductReq
 	id := in.GetId()
 	fmt.Println(id)
 	db := initDB()
-	product := deleteProduct(db)
+	product := DeleteProduct(db)
 	// 削除したProductデータを返す
-	reply := fmt.Sprintf(product)
 	return &pb.DeleteProductReply{
-		Message: reply,
+		Id:    int32(product.ID),
+		Code:  product.Code,
+		Price: int32(product.Price),
 	}, nil
 }
 
@@ -77,8 +78,7 @@ func initDB() (db *gorm.DB) {
 	return
 }
 
-func deleteProduct(db *gorm.DB) (product Product) {
-	var product Product
+func DeleteProduct(db *gorm.DB) (product Product) {
 	db.Debug().Find(&product)
 	var productService ProductService
 	db.Debug().Find(&productService)

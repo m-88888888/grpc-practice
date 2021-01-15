@@ -2,6 +2,8 @@ module github.com/m-88888888/grpc-practice
 
 go 1.15
 
+replace local.packages/product => ./product
+
 require (
 	github.com/golang/protobuf v1.4.3
 	github.com/pkg/errors v0.9.1

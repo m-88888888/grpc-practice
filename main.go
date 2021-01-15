@@ -7,6 +7,7 @@ import (
 	"net"
 
 	pb "github.com/m-88888888/grpc-practice/pb/calc/proto"
+	"github.com/m-88888888/grpc-practice/product"
 
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
@@ -48,7 +49,7 @@ func main() {
 	//if err := server(); err != nil {
 	//	log.Fatalf("%v", err)
 	//}
-	if err := product.server(); err != nil {
+	if err := product.Server(); err != nil {
 		log.Fatalf("%v", err)
 	}
 }
